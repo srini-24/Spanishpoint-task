@@ -1,0 +1,54 @@
+using OpenQA.Selenium;  
+using OpenQA.Selenium.Chrome;  
+using System;  
+using System.Collections.Generic;  
+using System.Linq;  
+using System.Text;  
+using System.Threading;  
+using System.Threading.Tasks;  
+namespace SeleniumTest  
+{  
+class Program  
+{  
+
+By solution_loc=By.xpath("//div[contains(@id,'menu')]//li//span[contains(text(),'Solutions & Services')]");
+static void Main(string[] args)  
+{  
+var expected_text="Engaging, Mobile Intranet and Digital Workspace collaboration solution.";
+IWebDriver driver = new ChromeDriver();  
+driver.Navigate().GoToUrl("https://www.google.com/");  
+driver.Manage().Window.Maximize();
+Thread.Sleep(1000);  
+WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+var element = wait.Until(ExpectedConditions.ElementIsVisible(By.xpath("//div[contains(@id,'menu')]//li//span[contains(text(),'Solutions & Services')]")));
+Actions action  = new Actions(driver);
+action.MoveToElement(element).Perform(); 
+Thread.Sleep(2000);  
+IWebElement ele1 = driver.FindElement(By.xpath("//ul//li[contains(@id,'menu')]//span[contains(text(),'Modern Work')]"));   
+ele1.Click();  
+Thread.Sleep(2000);
+var e = d.FindElement(By.XPath("//h2[contains(text(),'Modern Workplace Solutions')]"));
+((IJavaScriptExecutor)d).ExecuteScript("arguments[0].scrollIntoView(true);", e); 
+
+Thread.Sleep(2000);
+var e2 = d.FindElement(By.XPath("//a[contains(text(),'Join Our')]"));
+((IJavaScriptExecutor)d).ExecuteScript("arguments[0].scrollIntoView(true);", e2); 
+Thread.Sleep(2000);
+
+IWebElement ele2 = driver.FindElement(By.xpath("//div[contains(@class,'vc_tta-tabs-container')]//span[contains(text(),'Employee Experience')]"));   
+ele2.Click();  
+Thread.Sleep(2000);
+
+var e3 = d.FindElement(By.XPath("//h3[contains(text(),'Employee Experience')]/following-sibling::div//p//strong"));
+((IJavaScriptExecutor)d).ExecuteScript("arguments[0].scrollIntoView(true);", e3); 
+Thread.Sleep(2000);
+
+var actualtext = driver.FindElement(By.xpath("//h3[contains(text(),'Employee Experience')]/following-sibling::div//p//strong")).Text;
+
+Console.WriteLine(actualtext.Equals(expected_text));
+
+driver.Close();  
+Console.Write("test case ended ");  
+}  
+}  
+}  
